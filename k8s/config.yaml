@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  keyvault-url: "https://jd-svc-platform-dev-kv-abcd12.vault.azure.net/"
+  environment: "dev"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: database-secrets
+type: Opaque
+stringData:
+  orders-connection-string: "Server=jd-svc-platform-dev-sql.database.windows.net;Database=orders;User ID=sqladmin;Password=REPLACE_WITH_ACTUAL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
+  inventory-connection-string: "Server=jd-svc-platform-dev-sql.database.windows.net;Database=inventory;User ID=sqladmin;Password=REPLACE_WITH_ACTUAL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
+  users-connection-string: "Server=jd-svc-platform-dev-sql.database.windows.net;Database=users;User ID=sqladmin;Password=REPLACE_WITH_ACTUAL_PASSWORD;Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: servicebus-secrets
+type: Opaque
+stringData:
+  connection-string: "Endpoint=sb://jd-svc-platform-dev-sb.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=REPLACE_WITH_ACTUAL_KEY"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: monitoring-secrets
+type: Opaque
+stringData:
+  appinsights-connection-string: "InstrumentationKey=REPLACE_WITH_ACTUAL_KEY;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/"
