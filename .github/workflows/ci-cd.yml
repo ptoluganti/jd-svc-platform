@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: api/go-api
+        working-directory: api/order-svc-api
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: api/rust-api
+        working-directory: api/receipt-svc-api
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: api/python-api
+        working-directory: api/account-svc-api
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

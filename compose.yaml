@@ -1,0 +1,63 @@
+version: "3.9"
+name: jd-svc-platform
+
+services:
+  order-svc-api:
+    build:
+      context: ./api/order-svc-api
+    image: jd/order-svc-api:local
+    environment:
+      - PORT=8080
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  receipt-svc-api:
+    build:
+      context: ./api/receipt-svc-api
+    image: jd/receipt-svc-api:local
+    environment:
+      - PORT=8081
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  account-svc-api:
+    build:
+      context: ./api/account-svc-api
+    image: jd/account-svc-api:local
+    environment:
+      - PORT=8082
+    ports:
+      - "8082:8082"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8082/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  react-ui:
+    build:
+      context: ./app/react-ui
+    image: jd/react-ui:local
+    depends_on:
+      order-svc-api:
+        condition: service_started
+      receipt-svc-api:
+        condition: service_started
+      account-svc-api:
+        condition: service_started
+    ports:
+      - "8083:80"
+
+networks:
+  default:
+    name: jd-svc-platform

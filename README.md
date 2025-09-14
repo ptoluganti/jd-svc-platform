@@ -6,9 +6,9 @@ Monorepo containing example microservices (Go, Rust, Python), a React UI, Terraf
 
 - `.github/workflows/ci-cd.yml` — CI jobs for build/validate
 - `api/`
-	- `go-api` — Order service (Go net/http)
-	- `rust-api` — Makeline service (Actix-Web)
-	- `python-api` — Loyalty service (FastAPI)
+	- `order-svc-api` — Order service (Go net/http)
+	- `receipt-svc-api` — Makeline service (Actix-Web)
+	- `account-svc-api` — Loyalty service (FastAPI)
 - `app/react-ui` — Vite React app
 - `infra/` — Terraform stubs (Azure resource group)
 
@@ -16,7 +16,7 @@ Monorepo containing example microservices (Go, Rust, Python), a React UI, Terraf
 
 ### Go API
 
-Run locally (in `api/go-api`):
+Run locally (in `api/order-svc-api`):
 
 ```powershell
 $env:PORT=8080
@@ -26,13 +26,13 @@ go run .
 Docker:
 
 ```powershell
-docker build -t go-api api/go-api
-docker run -p 8080:8080 go-api
+docker build -t order-svc-api api/order-svc-api
+docker run -p 8080:8080 order-svc-api
 ```
 
 ### Rust API
 
-Run locally (in `api/rust-api`):
+Run locally (in `api/receipt-svc-api`):
 
 ```powershell
 cargo run
@@ -41,13 +41,13 @@ cargo run
 Docker (similar to Go API):
 
 ```powershell
-docker build -t rust-api api/rust-api
-docker run -p 8081:8081 rust-api
+docker build -t receipt-svc-api api/receipt-svc-api
+docker run -p 8081:8081 receipt-svc-api
 ```
 
 ### Python API
 
-Run locally (in `api/python-api`):
+Run locally (in `api/account-svc-api`):
 
 ```powershell
 pip install -r requirements.txt
@@ -57,8 +57,8 @@ python .\main.py
 Docker:
 
 ```powershell
-docker build -t python-api api/python-api
-docker run -p 8082:8082 python-api
+docker build -t account-svc-api api/account-svc-api
+docker run -p 8082:8082 account-svc-api
 ```
 
 ### React UI
@@ -75,6 +75,27 @@ Docker:
 ```powershell
 docker build -t react-ui app/react-ui
 docker run -p 8080:80 react-ui
+```
+
+### Run everything with Docker Compose
+
+From the repo root:
+
+```powershell
+docker compose up --build
+```
+
+Then open:
+
+- React UI: <http://localhost:8083>
+- Go API: <http://localhost:8080/health>
+- Rust API: <http://localhost:8081/health>
+- Python API: <http://localhost:8082/health>
+
+Stop and remove:
+
+```powershell
+docker compose down
 ```
 
 ### Terraform
