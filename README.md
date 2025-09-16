@@ -9,7 +9,7 @@ Monorepo containing example microservices (Go, Rust, Python), a React UI, Terraf
 	- `order-svc-api` — Order service (Go net/http)
 	- `receipt-svc-api` — Makeline service (Actix-Web)
 	- `account-svc-api` — Loyalty service (FastAPI)
-- `app/react-ui` — Vite React app
+- `app/self-svc-ui` — Vite React app
 - `infra/` — Terraform stubs (Azure resource group)
 
 ## Quick start
@@ -63,7 +63,7 @@ docker run -p 8082:8082 account-svc-api
 
 ### React UI
 
-Run locally (in `app/react-ui`):
+Run locally (in `app/self-svc-ui`):
 
 ```powershell
 npm install
@@ -73,8 +73,8 @@ npm run dev
 Docker:
 
 ```powershell
-docker build -t react-ui app/react-ui
-docker run -p 8080:80 react-ui
+docker build -t self-svc-ui app/self-svc-ui
+docker run -p 8080:80 self-svc-ui
 ```
 
 ### Run everything with Docker Compose

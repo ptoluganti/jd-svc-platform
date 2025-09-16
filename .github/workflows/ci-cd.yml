@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: app/react-ui
+        working-directory: app/self-svc-ui
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

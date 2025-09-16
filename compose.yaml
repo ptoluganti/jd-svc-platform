@@ -11,7 +11,7 @@ services:
     ports:
       - "8080:8080"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -25,7 +25,7 @@ services:
     ports:
       - "8081:8081"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8081/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/healthz"]
       interval: 10s
       timeout: 3s
       retries: 5
@@ -39,15 +39,15 @@ services:
     ports:
       - "8082:8082"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:8082/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:8082/healthz"]
       interval: 10s
       timeout: 3s
       retries: 5
 
-  react-ui:
+  self-svc-ui:
     build:
-      context: ./app/react-ui
-    image: jd/react-ui:local
+      context: ./app/self-svc-ui
+    image: jd/self-svc-ui:local
     depends_on:
       order-svc-api:
         condition: service_started

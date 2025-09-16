@@ -22,6 +22,10 @@ func main() {
 		writeJSON(w, http.StatusOK, response{"status": "ok", "service": "order-svc-api"})
 	})
 
+	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		writeJSON(w, http.StatusOK, response{"status": "ok", "service": "order-svc-api"})
+	})
+
 	mux.HandleFunc("/orders", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
